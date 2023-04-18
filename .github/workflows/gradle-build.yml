@@ -18,7 +18,10 @@ jobs:
           distribution: adopt
           java-version: 17
       - name: Build with Gradle
-        run: ./api/gradlew clean build
+        run: |
+          cd api
+          ./gradlew clean build
+          cd ..
         shell: bash
       
       - name: Prepare S3 upload target 
