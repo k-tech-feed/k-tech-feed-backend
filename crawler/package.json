@@ -6,23 +6,22 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node src/app.js"
+    "dev": "nodemon --watch src/ src/app.js",
+    "start": "node src/app.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.0.3",
-    "express": "^4.18.2"
-  },
-  "nodemonConfig": {
-    "exec": "npm run dev",
-    "watch": [
-      "src/"
-    ],
-    "ignore": [
-      "node_modules/*"
-    ]
+    "express": "^4.18.2",
+    "http-errors": "^2.0.0",
+    "morgan": "^1.10.0",
+    "node-cron": "^3.0.2",
+    "openai": "^3.2.1",
+    "rss-parser": "^3.13.0",
+    "winston": "^3.8.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.22",
