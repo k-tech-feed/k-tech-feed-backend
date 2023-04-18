@@ -4,6 +4,7 @@ on:
   push:
     paths:
      - 'api/**'
+     - '.github/workflows/gradle-build.yml'
 
 jobs:
   build:
@@ -17,11 +18,11 @@ jobs:
           distribution: adopt
           java-version: 11
       - name: Build with Gradle
-        run: ./gradlew clean build
+        run: ./api/gradlew clean build
         shell: bash
       
       - name: Prepare S3 upload target 
-        run: mkdir artifacts && cp build/libs/*SNAPSHOT.jar artifacts/
+        run: mkdir artifacts && cp ./api/build/libs/*SNAPSHOT.jar artifacts/
 
       - name: Install AWS CLI
         run: sudo apt-get update && sudo apt-get install -y awscli
