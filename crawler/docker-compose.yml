@@ -1,0 +1,17 @@
+version: '3.3'
+
+services: 
+  rss-parser:
+    container_name: rss-parser
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 5000:5000
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      PORT: ${PORT}
+      API_KEY: ${API_KEY}
+      ORGANIZATION: ${ORGANIZATION}
