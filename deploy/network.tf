@@ -10,7 +10,7 @@ resource "aws_subnet" "public" {
   availability_zone = data.aws_availability_zones.available.names[count.index]
   vpc_id            = aws_vpc.main.id
 
-  # map_public_ip_on_launch = true
+  map_public_ip_on_launch = true
 }
 
 resource "aws_internet_gateway" "gw" {

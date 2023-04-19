@@ -30,6 +30,10 @@ variable "app_port" {
 #   default     = "arn:aws:iam::035898547283:role/ecsTaskExecutionRole"
 # }
 
+variable "ec2_key_name" {
+  default = "ktechfeed"
+}
+
 variable "health_check_path" {
   default = "/health"
 }
@@ -77,7 +81,7 @@ variable "db_instance_class" {
 }
 
 variable "db_allocated_storage" {
-  default = 20
+  default = 10
 }
 
 variable "db_storage_type" {
