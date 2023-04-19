@@ -20,6 +20,14 @@ variable "app_port" {
   default = 8080
 }
 
+variable "domain" {
+  default = "k-tech-feed.site"
+}
+
+variable "frontend_ip" {
+  default = "76.76.21.21"
+}
+
 # variable "app_count" {
 #   description = "Number of docker containers to run"
 #   default     = 1
