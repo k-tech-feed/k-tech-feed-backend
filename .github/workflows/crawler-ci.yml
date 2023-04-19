@@ -41,6 +41,6 @@ jobs:
           REPOSITORY: k-tech-feed-crawler
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          cd api
+          cd crawler
           docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
