@@ -20,7 +20,14 @@ class ArticlePersistenceAdapter implements ArticlePersistencePort {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<Article> getAll(long afterId, Integer size) {
+    public List<Article> getAllByIds(List<Long> articleIds) {
+        return articleRepository.findAllById(articleIds).stream()
+            .map(articleMapper::toDomain)
+            .toList();
+    }
+
+    @Override
+    public List<Article> getAll(long afterId, int size) {
         return queryFactory.selectFrom(articleJpaEntity)
             .where(articleJpaEntity.id.gt(afterId))
             .limit(size)
@@ -32,7 +39,7 @@ class ArticlePersistenceAdapter implements ArticlePersistencePort {
     }
 
     @Override
-    public List<Article> getAllByAuthorId(long authorId, Long afterId, Integer size) {
+    public List<Article> getAllByAuthorId(long authorId, long afterId, int size) {
         return queryFactory.selectFrom(articleJpaEntity)
             .where(articleJpaEntity.id.gt(afterId)
                        .and(articleJpaEntity.author.id.eq(authorId)))
@@ -45,7 +52,7 @@ class ArticlePersistenceAdapter implements ArticlePersistencePort {
     }
 
     @Override
-    public List<Article> getAllByHashtag(String hashtag, Long afterId, Integer size) {
+    public List<Article> getAllByHashtag(String hashtag, long afterId, int size) {
         return queryFactory.selectFrom(articleJpaEntity)
             .where(articleJpaEntity.id.gt(afterId)
                        .and(articleJpaEntity.hashtags.any().name.eq(hashtag)))
@@ -58,7 +65,7 @@ class ArticlePersistenceAdapter implements ArticlePersistencePort {
     }
 
     @Override
-    public List<Article> getAllByKeyword(String keyword, Long afterId, Integer size) {
+    public List<Article> getAllByKeyword(String keyword, long afterId, int size) {
         // TODO: 로직 고도화
         return queryFactory.selectFrom(articleJpaEntity)
             .where(articleJpaEntity.id.gt(afterId)
