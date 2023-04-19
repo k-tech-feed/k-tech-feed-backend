@@ -6,6 +6,13 @@ on:
      - 'api/**'
      - '.github/workflows/gradle-build.yml'
 
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} # AWS User Credentials.
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }} # AWS User Credentials.
+  EC2_PRIVATE_SSH_KEY: ${{ secrets.AWS_EC2_SSH_PRIVATE_KEY }} # Used to ssh into EC2.
+  EC2_PUBLIC_SSH_KEY: ${{ secrets.AWS_SSH_PUBLIC_KEY }} # Used to upload public key to aws.
+  AWS_REGION: ap-northeast-2
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -23,9 +30,6 @@ jobs:
           ./gradlew clean build
           cd ..
         shell: bash
-      
-      - name: Prepare S3 upload target 
-        run: mkdir artifacts && cp ./api/build/libs/*SNAPSHOT.jar artifacts/
 
       - name: Install AWS CLI
         run: sudo apt-get update && sudo apt-get install -y awscli
@@ -37,9 +41,17 @@ jobs:
           echo "[default]
           aws_access_key_id = ${AWS_ACCESS_KEY_ID}
           aws_secret_access_key = ${AWS_SECRET_ACCESS_KEY}" > ~/.aws/credentials
-        env: 
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
-        
-      - name: Copy files to S3
-        run: aws s3 cp artifacts s3://${{ secrets.AWS_S3_BUCKET }}/builds/${GITHUB_SHA::7}/ --recursive --region ap-northeast-2
+      
+      - name: Login to AWS ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+      
+      - name: Build, tag, and push docker image to Amazon ECR
+        env:
+          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          REPOSITORY: k-tech-feed-ecr
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          cd api
+          docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
+          docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
