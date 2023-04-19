@@ -7,4 +7,12 @@ terraform {
       version = "~> 4.63.0"
     }
   }
+
+  backend "s3" {
+    bucket  = "k-tech-feed-bucket"
+    key     = "terraform/terraform.tfstate"
+    region  = "ap-northeast-2"
+    encrypt = true
+    # dynamodb_table = "terraform-lock"
+  }
 }
