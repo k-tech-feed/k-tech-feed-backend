@@ -4,7 +4,9 @@ import static com.gongmeda.ktechfeedbackend.adapter.out.persistence.QArticleJpaE
 
 import com.gongmeda.ktechfeedbackend.application.port.out.ArticlePersistencePort;
 import com.gongmeda.ktechfeedbackend.domain.Article;
+import com.querydsl.core.types.Predicate;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +31,7 @@ class ArticlePersistenceAdapter implements ArticlePersistencePort {
     @Override
     public List<Article> getAll(long afterId, int size) {
         return queryFactory.selectFrom(articleJpaEntity)
-            .where(articleJpaEntity.id.gt(afterId))
+            .where(cursorCondition(afterId))
             .limit(size)
             .orderBy(articleJpaEntity.timestamp.desc())
             .fetch()
@@ -41,8 +43,8 @@ class ArticlePersistenceAdapter implements ArticlePersistencePort {
     @Override
     public List<Article> getAllByAuthorId(long authorId, long afterId, int size) {
         return queryFactory.selectFrom(articleJpaEntity)
-            .where(articleJpaEntity.id.gt(afterId)
-                       .and(articleJpaEntity.author.id.eq(authorId)))
+            .where(cursorCondition(afterId),
+                   articleJpaEntity.author.id.eq(authorId))
             .limit(size)
             .orderBy(articleJpaEntity.timestamp.desc())
             .fetch()
@@ -54,8 +56,8 @@ class ArticlePersistenceAdapter implements ArticlePersistencePort {
     @Override
     public List<Article> getAllByHashtag(String hashtag, long afterId, int size) {
         return queryFactory.selectFrom(articleJpaEntity)
-            .where(articleJpaEntity.id.gt(afterId)
-                       .and(articleJpaEntity.hashtags.any().name.eq(hashtag)))
+            .where(cursorCondition(afterId),
+                   articleJpaEntity.hashtags.any().name.eq(hashtag))
             .limit(size)
             .orderBy(articleJpaEntity.timestamp.desc())
             .fetch()
@@ -68,16 +70,28 @@ class ArticlePersistenceAdapter implements ArticlePersistencePort {
     public List<Article> getAllByKeyword(String keyword, long afterId, int size) {
         // TODO: 로직 고도화
         return queryFactory.selectFrom(articleJpaEntity)
-            .where(articleJpaEntity.id.gt(afterId)
-                       .and(articleJpaEntity.title.containsIgnoreCase(keyword)
-                                .or(articleJpaEntity.summary.containsIgnoreCase(keyword))
-                                .or(articleJpaEntity.hashtags.any().name.containsIgnoreCase(keyword))))
+            .where(cursorCondition(afterId),
+                   articleJpaEntity.title.containsIgnoreCase(keyword)
+                       .or(articleJpaEntity.summary.containsIgnoreCase(keyword))
+                       .or(articleJpaEntity.hashtags.any().name.containsIgnoreCase(keyword)))
             .limit(size)
             .orderBy(articleJpaEntity.timestamp.desc())
             .fetch()
             .stream()
             .map(articleMapper::toDomain)
             .toList();
+    }
+
+    private Predicate cursorCondition(long afterId) {
+        if (afterId > 0) {
+            LocalDateTime cursorDateTime = queryFactory.select(articleJpaEntity.timestamp)
+                .from(articleJpaEntity)
+                .where(articleJpaEntity.id.eq(afterId))
+                .fetchOne();
+            return articleJpaEntity.timestamp.loe(cursorDateTime)
+                .and(articleJpaEntity.id.ne(afterId));
+        }
+        return null;
     }
 
     @Override

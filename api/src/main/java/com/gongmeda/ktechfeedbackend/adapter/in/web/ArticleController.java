@@ -49,7 +49,7 @@ class ArticleController {
 
     @GetMapping("{id}")
     RedirectView view(@PathVariable @Positive long id, HttpServletRequest request) {
-        String redirectUrl = articleUseCase.viewArticle(id, request.getRemoteAddr());
+        String redirectUrl = articleUseCase.viewArticle(id, request.getHeader("X-Forwarded-For"));
         return new RedirectView(redirectUrl);
     }
 
