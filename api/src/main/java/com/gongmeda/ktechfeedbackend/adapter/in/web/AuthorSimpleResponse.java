@@ -7,14 +7,14 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-class ArticleAuthorResponse {
+class AuthorSimpleResponse {
 
     private final Long id;
     private final String name;
     private final String logoUrl;
 
-    public static ArticleAuthorResponse from(Author author) {
-        return new ArticleAuthorResponse(
+    public static AuthorSimpleResponse from(Author author) {
+        return new AuthorSimpleResponse(
             author.getId(),
             author.getName(),
             author.getLogoUrl()

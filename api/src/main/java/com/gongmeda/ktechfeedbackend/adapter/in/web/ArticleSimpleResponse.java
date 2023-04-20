@@ -11,14 +11,14 @@ import lombok.Getter;
 class ArticleSimpleResponse {
 
     private final Long id;
-    private final ArticleAuthorResponse author;
+    private final AuthorSimpleResponse author;
     private final String title;
     private final LocalDateTime timestamp;
 
     public static ArticleSimpleResponse from(Article article) {
         return new ArticleSimpleResponse(
             article.getId(),
-            ArticleAuthorResponse.from(article.getAuthor()),
+            AuthorSimpleResponse.from(article.getAuthor()),
             article.getTitle(),
             article.getTimestamp()
         );

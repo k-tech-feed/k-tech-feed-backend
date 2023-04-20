@@ -12,7 +12,7 @@ import lombok.Getter;
 class ArticleResponse {
 
     private final Long id;
-    private final ArticleAuthorResponse author;
+    private final AuthorSimpleResponse author;
     private final String title;
     private final String summary;
 //    private final String linkUrl;
@@ -23,7 +23,7 @@ class ArticleResponse {
     public static ArticleResponse from(Article article) {
         return new ArticleResponse(
             article.getId(),
-            ArticleAuthorResponse.from(article.getAuthor()),
+            AuthorSimpleResponse.from(article.getAuthor()),
             article.getTitle(),
             article.getSummary(),
 //            article.getLinkUrl(),
