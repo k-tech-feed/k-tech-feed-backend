@@ -11,12 +11,15 @@ public class WebConfig implements WebMvcConfigurer {
     @Value("${spring.security.cors.allowed-origins}")
     private String[] allowedOrigins;
 
+    @Value("${spring.security.cors.allow-credentials}")
+    private boolean allowCredentials = true;
+
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
             .allowedOrigins(allowedOrigins)
             .allowedMethods("GET", "POST", "PATCH", "DELETE", "HEAD", "OPTIONS")
-            .allowCredentials(true)
+            .allowCredentials(allowCredentials)
             .maxAge(3600);
     }
 }
