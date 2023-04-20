@@ -1,5 +1,6 @@
 package com.gongmeda.ktechfeedbackend.application.service;
 
+import com.gongmeda.ktechfeedbackend.application.event.ArticleSearchedEvent;
 import com.gongmeda.ktechfeedbackend.application.event.ArticleViewedEvent;
 import com.gongmeda.ktechfeedbackend.application.port.in.PagingQuery;
 import com.gongmeda.ktechfeedbackend.application.port.out.EventPublisher;
@@ -40,6 +41,9 @@ class ArticleService implements ArticleUseCase {
 
     @Override
     public List<Article> getArticlesByKeyword(String keyword, PagingQuery pagingQuery) {
+        // 아티클 검색 이벤트 발행
+        eventPublisher.publish(new ArticleSearchedEvent(keyword));
+
         return articlePersistencePort.getAllByKeyword(keyword, pagingQuery.getAfterId(), pagingQuery.getSize());
     }
 
