@@ -12,7 +12,7 @@ public class UpdateAuthorCommand extends SelfValidating<AddAuthorCommand> {
     private String name;
     private String logoUrl;
     private String blogUrl;
-    private String RSSUrl;
+    private String rssUrl;
     private String description;
     private Map<String, String> links;
 
@@ -20,14 +20,14 @@ public class UpdateAuthorCommand extends SelfValidating<AddAuthorCommand> {
         String name,
         String logoUrl,
         String blogUrl,
-        String RSSUrl,
+        String rssUrl,
         String description,
         Map<String, String> links
     ) {
         this.name = name;
         this.logoUrl = logoUrl;
         this.blogUrl = blogUrl;
-        this.RSSUrl = RSSUrl;
+        this.rssUrl = rssUrl;
         this.description = description;
         this.links = links;
         this.validateSelf();

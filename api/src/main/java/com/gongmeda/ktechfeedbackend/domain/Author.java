@@ -57,14 +57,14 @@ public class Author {
         String name,
         String logoUrl,
         String blogUrl,
-        String RSSUrl,
+        String rssUrl,
         String description,
         Map<String, String> links
     ) {
         this.name = name;
         this.logoUrl = logoUrl;
         this.blogUrl = blogUrl;
-        this.rssUrl = RSSUrl;
+        this.rssUrl = rssUrl;
         this.description = description;
         this.links = links;
     }

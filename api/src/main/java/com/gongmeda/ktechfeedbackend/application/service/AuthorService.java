@@ -57,7 +57,7 @@ class AuthorService implements AuthorUseCase {
             updateAuthorCommand.getName(),
             updateAuthorCommand.getLogoUrl(),
             updateAuthorCommand.getBlogUrl(),
-            updateAuthorCommand.getRSSUrl(),
+            updateAuthorCommand.getRssUrl(),
             updateAuthorCommand.getDescription(),
             updateAuthorCommand.getLinks()
         );

@@ -11,7 +11,7 @@ class AuthorUrlResponse {
 
     private final Long id;
     private final String blogUrl;
-    private final String RSSUrl;
+    private final String rssUrl;
 
     public static AuthorUrlResponse from(Author author) {
         return new AuthorUrlResponse(
