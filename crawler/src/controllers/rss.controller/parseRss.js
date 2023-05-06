@@ -50,7 +50,7 @@ function delay(ms) {
 async function sendContent(feedItem) {
   console.log("sendContent");
   const newContent = await addHashtags(feedItem);
-  const res = await axios.post("https://api.k-tech-feed.site/articles", {
+  await axios.post("https://api.k-tech-feed.site/articles", {
     ...newContent,
   });
 }
@@ -69,8 +69,6 @@ const parseRss = async (req, res) => {
           ? item["content:encoded"]
           : item.content;
 
-        // const onlyTextContent = content.replace(RSS_REGEXP, "");
-
         return {
           authorId: feed.id,
           title: item.title,
@@ -84,21 +82,22 @@ const parseRss = async (req, res) => {
     })
     .flat();
 
+  const failedAuthorIds = new Set();
+
   for (let i = 0; i < feedItems.length; i++) {
-    if (i === 0) {
-      try {
-        await sendContent(feedItems[i]);
-        console.log("success to add content");
-      } catch (err) {
-        console.log("Failed to add content");
+    if(failedAuthorIds.has(feedItems[i].authorId)){
+      continue;
+    }
+    try {
+      if(i > 0){
+        await delay(20000)
       }
-    } else {
-      await delay(20000)
-        .then(async () => {
-          await sendContent(feedItems[i]);
-          console.log("success to add content");
-        })
-        .catch((err) => console.log("Failed to add content"));
+      await sendContent(feedItems[i]);
+      console.log("success to add content");
+    } catch (err) {
+      console.log("Failed to add content");
+      failedAuthorIds.add(feedItems[i].authorId);
+      continue;
     }
   }
 
