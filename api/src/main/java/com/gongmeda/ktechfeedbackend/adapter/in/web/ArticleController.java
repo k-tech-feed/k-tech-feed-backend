@@ -2,6 +2,7 @@ package com.gongmeda.ktechfeedbackend.adapter.in.web;
 
 import com.gongmeda.ktechfeedbackend.application.port.in.ArticleUseCase;
 import com.gongmeda.ktechfeedbackend.application.port.in.PagingQuery;
+import com.gongmeda.ktechfeedbackend.common.UrlUtils;
 import com.gongmeda.ktechfeedbackend.domain.Article;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.constraints.Positive;
@@ -50,7 +51,7 @@ class ArticleController {
 
     @GetMapping("exists")
     boolean exists(@RequestParam @URL String linkUrl) {
-        return articleUseCase.articleExistsByLinkUrl(linkUrl);
+        return articleUseCase.articleExistsByLinkUrl(UrlUtils.encodeKorean(linkUrl));
     }
 
     @GetMapping("{id}")
