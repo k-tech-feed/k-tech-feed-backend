@@ -1,13 +1,21 @@
-FROM node:18.16-alpine
+FROM python:3.10-alpine as python
 
-RUN mkdir -p /app
+# Configure Poetry
+ENV POETRY_VERSION=1.4.2
+
+# Install poetry
+RUN apk --no-cache add --virtual .build-deps \
+    build-base linux-headers libffi-dev
+RUN pip3 install poetry==${POETRY_VERSION}
 
 WORKDIR /app
 
-COPY package*.json /app
+COPY pyproject.toml /app/
+COPY poetry.lock /app/
+RUN poetry install --no-dev
 
-RUN npm install
+RUN apk --no-cache del --purge .build-deps
 
 COPY . /app
 
-CMD ["npm", "start"]
+CMD ["poetry", "run", "python", "main.py"]
