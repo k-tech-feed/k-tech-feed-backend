@@ -18,7 +18,7 @@ RETRY_INTERVAL = 10  # seconds
 sched = BlockingScheduler()
 
 
-@sched.scheduled_job("cron", day_of_week="mon", hour=0, minute=0, second=0)
+@sched.scheduled_job('cron', hour=0)
 def job():
     start = time.time()
 
