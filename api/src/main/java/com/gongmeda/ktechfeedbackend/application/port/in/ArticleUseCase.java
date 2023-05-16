@@ -9,6 +9,7 @@ public interface ArticleUseCase {
     List<Article> getArticlesByAuthorId(long authorId, PagingQuery pagingQuery);
     List<Article> getArticlesByHashtag(String hashtag, PagingQuery pagingQuery);
     List<Article> getArticlesByKeyword(String keyword, PagingQuery pagingQuery);
+    boolean articleExistsByLinkUrl(String linkUrl);
     String viewArticle(long articleId, String ipAddress);
     void addArticle(AddArticleCommand addArticleCommand);
     void deleteArticle(long articleId);

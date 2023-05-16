@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.constraints.Positive;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.validator.constraints.URL;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,6 +46,11 @@ class ArticleController {
             result = articleUseCase.getArticles(pagingQuery);
         }
         return result.stream().map(ArticleResponse::from).toList();
+    }
+
+    @GetMapping("exists")
+    boolean exists(@RequestParam @URL String linkUrl) {
+        return articleUseCase.articleExistsByLinkUrl(linkUrl);
     }
 
     @GetMapping("{id}")
