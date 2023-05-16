@@ -2,11 +2,13 @@ package com.gongmeda.ktechfeedbackend.adapter.in.web;
 
 import com.gongmeda.ktechfeedbackend.application.port.in.ArticleUseCase;
 import com.gongmeda.ktechfeedbackend.application.port.in.PagingQuery;
+import com.gongmeda.ktechfeedbackend.common.UrlUtils;
 import com.gongmeda.ktechfeedbackend.domain.Article;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.constraints.Positive;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.validator.constraints.URL;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,6 +47,11 @@ class ArticleController {
             result = articleUseCase.getArticles(pagingQuery);
         }
         return result.stream().map(ArticleResponse::from).toList();
+    }
+
+    @GetMapping("exists")
+    boolean exists(@RequestParam @URL String linkUrl) {
+        return articleUseCase.articleExistsByLinkUrl(UrlUtils.encodeKorean(linkUrl));
     }
 
     @GetMapping("{id}")

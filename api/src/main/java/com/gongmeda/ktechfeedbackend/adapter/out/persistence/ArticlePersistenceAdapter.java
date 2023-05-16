@@ -109,7 +109,15 @@ class ArticlePersistenceAdapter implements ArticlePersistencePort {
 
     @Override
     public boolean existsByLinkUrl(String linkUrl) {
-        return articleRepository.existsByLinkUrl(linkUrl);
+        // linkUrl can have or not have trailing slash
+        // check both with trailing slash and no slash
+        if (linkUrl.endsWith("/")) {
+            return articleRepository.existsByLinkUrl(linkUrl)
+                || articleRepository.existsByLinkUrl(linkUrl.substring(0, linkUrl.length() - 1));
+        } else {
+            return articleRepository.existsByLinkUrl(linkUrl + "/")
+                || articleRepository.existsByLinkUrl(linkUrl);
+        }
     }
 
     @Override

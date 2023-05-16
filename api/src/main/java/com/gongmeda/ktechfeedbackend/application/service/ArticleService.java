@@ -48,6 +48,11 @@ class ArticleService implements ArticleUseCase {
     }
 
     @Override
+    public boolean articleExistsByLinkUrl(String linkUrl) {
+        return articlePersistencePort.existsByLinkUrl(linkUrl);
+    }
+
+    @Override
     public String viewArticle(long articleId, String ipAddress) {
         Article article = articlePersistencePort.getById(articleId).orElseThrow(/*TODO 예외 수정*/);
 
