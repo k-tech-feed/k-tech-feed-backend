@@ -1,4 +1,5 @@
 import datetime
+import json
 import logging
 import sys
 import time
@@ -27,6 +28,7 @@ def job():
     article_analyzer = ArticleAnalyzer()
 
     added_article_cnt = 0
+    skipped_article_cnt = 0
 
     # parse RSS feed and add to DB for each author
     for author in authors:
@@ -35,6 +37,15 @@ def job():
             logging.debug(f"start parsing - article: {article.get('title')}")
 
             content = article.get("summary")
+            link_url = article.get("linkUrl")
+
+            # skip duplicated articles
+            is_duplicated = json.loads(
+                requests.get(urljoin(getenv("API_URL"), f"/articles/exists?linkUrl={link_url}")).content)
+            if is_duplicated:
+                logging.debug(f"Skipping article: {article.get('title')}")
+                skipped_article_cnt += 1
+                continue
 
             left_cnt = RETRY_COUNT
             while left_cnt > 0:
@@ -58,14 +69,17 @@ def job():
                 logging.info(f"Successfully added article: {article.get('title')}")
                 added_article_cnt += 1
             else:
-                logging.debug(f"Skipped article: {article.get('title')}")
+                logging.error(f"Error adding article: {article.get('title')}")
 
             logging.debug(f"finish parsing - article: {article.get('title')}")
             time.sleep(20)  # default sleep time
 
     end = time.time()
     result = datetime.timedelta(seconds=(end - start))
-    logging.info(f"Total Job Running Time: {result}, Added Article Count: {added_article_cnt}")
+    logging.info(
+        f"Total Job Running Time: {result}, "
+        f"Added Article Count: {added_article_cnt}, "
+        f"Skipped Article Count: {skipped_article_cnt}")
 
 
 if __name__ == "__main__":

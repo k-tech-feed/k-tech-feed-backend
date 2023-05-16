@@ -3,7 +3,7 @@ import logging
 import re
 import time
 from time import gmtime
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 
 import feedparser
 import requests
@@ -74,7 +74,7 @@ def parse_author_articles(author):
             "title": e.get("title"),
             "summary": re.sub(RSS_REGEXP, "", content)[:1000],
             "thumbnailUrl": get_thumbnail_url(parsed_html),
-            "linkUrl": e.get("link"),
+            "linkUrl": urljoin(e.get("link"), urlparse(e.get("link")).path),
             "hashtags": get_hashtags(e),
             "timestamp": get_timestamp(e),
         })
