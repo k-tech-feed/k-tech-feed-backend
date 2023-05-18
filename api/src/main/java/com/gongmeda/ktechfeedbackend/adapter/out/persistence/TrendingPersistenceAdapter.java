@@ -1,16 +1,17 @@
 package com.gongmeda.ktechfeedbackend.adapter.out.persistence;
 
-import static com.gongmeda.ktechfeedbackend.adapter.out.persistence.QArticleJpaEntity.articleJpaEntity;
-import static com.gongmeda.ktechfeedbackend.adapter.out.persistence.QArticleViewRecordJpaEntity.articleViewRecordJpaEntity;
-import static com.gongmeda.ktechfeedbackend.adapter.out.persistence.QHashtagJpaEntity.hashtagJpaEntity;
-
 import com.gongmeda.ktechfeedbackend.application.port.out.TrendingPersistencePort;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import java.time.LocalDate;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+
+import java.time.LocalDate;
+import java.util.List;
+
+import static com.gongmeda.ktechfeedbackend.adapter.out.persistence.QArticleJpaEntity.articleJpaEntity;
+import static com.gongmeda.ktechfeedbackend.adapter.out.persistence.QArticleViewRecordJpaEntity.articleViewRecordJpaEntity;
+import static com.gongmeda.ktechfeedbackend.adapter.out.persistence.QHashtagJpaEntity.hashtagJpaEntity;
 
 @RequiredArgsConstructor
 @Repository

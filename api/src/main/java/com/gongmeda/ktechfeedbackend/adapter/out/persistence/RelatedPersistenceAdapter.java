@@ -1,18 +1,18 @@
 package com.gongmeda.ktechfeedbackend.adapter.out.persistence;
 
-import static com.gongmeda.ktechfeedbackend.adapter.out.persistence.QAuthorJpaEntity.authorJpaEntity;
-import static com.gongmeda.ktechfeedbackend.adapter.out.persistence.QHashtagJpaEntity.hashtagJpaEntity;
-import static com.gongmeda.ktechfeedbackend.adapter.out.persistence.QSearchRecordJpaEntity.searchRecordJpaEntity;
-
-import com.gongmeda.ktechfeedbackend.application.port.out.AuthorPersistencePort;
 import com.gongmeda.ktechfeedbackend.application.port.out.RelatedPersistencePort;
 import com.gongmeda.ktechfeedbackend.domain.Author;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+import static com.gongmeda.ktechfeedbackend.adapter.out.persistence.QAuthorJpaEntity.authorJpaEntity;
+import static com.gongmeda.ktechfeedbackend.adapter.out.persistence.QHashtagJpaEntity.hashtagJpaEntity;
+import static com.gongmeda.ktechfeedbackend.adapter.out.persistence.QSearchRecordJpaEntity.searchRecordJpaEntity;
 
 @RequiredArgsConstructor
 @Repository

@@ -1,10 +1,11 @@
 package com.gongmeda.ktechfeedbackend.adapter.in.web;
 
 import com.gongmeda.ktechfeedbackend.domain.Article;
-import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+
+import java.time.LocalDateTime;
 
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)

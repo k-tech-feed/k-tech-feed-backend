@@ -1,18 +1,15 @@
 package com.gongmeda.ktechfeedbackend.adapter.out.persistence;
 
 import io.hypersistence.utils.hibernate.type.json.JsonType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import java.util.HashMap;
-import java.util.Map;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Getter
 @AllArgsConstructor

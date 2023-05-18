@@ -1,16 +1,17 @@
 package com.gongmeda.ktechfeedbackend.adapter.out.persistence;
 
-import static com.gongmeda.ktechfeedbackend.adapter.out.persistence.QArticleJpaEntity.articleJpaEntity;
-
 import com.gongmeda.ktechfeedbackend.application.port.out.ArticlePersistencePort;
 import com.gongmeda.ktechfeedbackend.domain.Article;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
+
+import static com.gongmeda.ktechfeedbackend.adapter.out.persistence.QArticleJpaEntity.articleJpaEntity;
 
 @RequiredArgsConstructor
 @Repository
@@ -44,7 +45,7 @@ class ArticlePersistenceAdapter implements ArticlePersistencePort {
     public List<Article> getAllByAuthorId(long authorId, long afterId, int size) {
         return queryFactory.selectFrom(articleJpaEntity)
             .where(cursorCondition(afterId),
-                   articleJpaEntity.author.id.eq(authorId))
+                articleJpaEntity.author.id.eq(authorId))
             .limit(size)
             .orderBy(articleJpaEntity.timestamp.desc())
             .fetch()
@@ -57,7 +58,7 @@ class ArticlePersistenceAdapter implements ArticlePersistencePort {
     public List<Article> getAllByHashtag(String hashtag, long afterId, int size) {
         return queryFactory.selectFrom(articleJpaEntity)
             .where(cursorCondition(afterId),
-                   articleJpaEntity.hashtags.any().name.eq(hashtag))
+                articleJpaEntity.hashtags.any().name.eq(hashtag))
             .limit(size)
             .orderBy(articleJpaEntity.timestamp.desc())
             .fetch()
@@ -71,9 +72,9 @@ class ArticlePersistenceAdapter implements ArticlePersistencePort {
         // TODO: 로직 고도화
         return queryFactory.selectFrom(articleJpaEntity)
             .where(cursorCondition(afterId),
-                   articleJpaEntity.title.containsIgnoreCase(keyword)
-                       .or(articleJpaEntity.summary.containsIgnoreCase(keyword))
-                       .or(articleJpaEntity.hashtags.any().name.containsIgnoreCase(keyword)))
+                articleJpaEntity.title.containsIgnoreCase(keyword)
+                    .or(articleJpaEntity.summary.containsIgnoreCase(keyword))
+                    .or(articleJpaEntity.hashtags.any().name.containsIgnoreCase(keyword)))
             .limit(size)
             .orderBy(articleJpaEntity.timestamp.desc())
             .fetch()

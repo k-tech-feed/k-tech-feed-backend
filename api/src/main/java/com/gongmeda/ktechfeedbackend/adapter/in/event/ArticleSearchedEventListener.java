@@ -1,8 +1,6 @@
 package com.gongmeda.ktechfeedbackend.adapter.in.event;
 
 import com.gongmeda.ktechfeedbackend.application.event.ArticleSearchedEvent;
-import com.gongmeda.ktechfeedbackend.application.event.ArticleViewedEvent;
-import com.gongmeda.ktechfeedbackend.application.port.in.ArticleViewRecordUseCase;
 import com.gongmeda.ktechfeedbackend.application.port.in.RelatedUseCase;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

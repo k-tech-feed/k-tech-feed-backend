@@ -1,10 +1,11 @@
 package com.gongmeda.ktechfeedbackend.adapter.in.web;
 
 import com.gongmeda.ktechfeedbackend.domain.Author;
-import java.util.Map;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+
+import java.util.Map;
 
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)

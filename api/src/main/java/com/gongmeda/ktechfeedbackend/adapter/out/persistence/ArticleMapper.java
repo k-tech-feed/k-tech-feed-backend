@@ -1,9 +1,10 @@
 package com.gongmeda.ktechfeedbackend.adapter.out.persistence;
 
 import com.gongmeda.ktechfeedbackend.domain.Article;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Component

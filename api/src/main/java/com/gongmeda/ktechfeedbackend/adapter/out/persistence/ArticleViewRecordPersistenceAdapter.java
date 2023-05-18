@@ -1,10 +1,11 @@
 package com.gongmeda.ktechfeedbackend.adapter.out.persistence;
 
 import com.gongmeda.ktechfeedbackend.application.port.out.ArticleViewRecordPersistencePort;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
 @Repository

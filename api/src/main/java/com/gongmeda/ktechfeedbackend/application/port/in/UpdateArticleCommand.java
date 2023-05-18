@@ -1,10 +1,11 @@
 package com.gongmeda.ktechfeedbackend.application.port.in;
 
 import com.gongmeda.ktechfeedbackend.common.SelfValidating;
-import java.time.LocalDateTime;
-import java.util.Collection;
 import lombok.EqualsAndHashCode;
 import lombok.Value;
+
+import java.time.LocalDateTime;
+import java.util.Collection;
 
 @EqualsAndHashCode(callSuper = true)
 @Value

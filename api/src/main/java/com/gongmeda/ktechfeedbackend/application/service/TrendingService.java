@@ -5,9 +5,10 @@ import com.gongmeda.ktechfeedbackend.application.port.in.TrendingUseCase;
 import com.gongmeda.ktechfeedbackend.application.port.out.ArticlePersistencePort;
 import com.gongmeda.ktechfeedbackend.application.port.out.TrendingPersistencePort;
 import com.gongmeda.ktechfeedbackend.domain.Article;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service

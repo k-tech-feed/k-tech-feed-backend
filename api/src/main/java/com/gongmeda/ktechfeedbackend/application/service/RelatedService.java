@@ -3,9 +3,10 @@ package com.gongmeda.ktechfeedbackend.application.service;
 import com.gongmeda.ktechfeedbackend.application.port.in.RelatedUseCase;
 import com.gongmeda.ktechfeedbackend.application.port.out.RelatedPersistencePort;
 import com.gongmeda.ktechfeedbackend.domain.Author;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service

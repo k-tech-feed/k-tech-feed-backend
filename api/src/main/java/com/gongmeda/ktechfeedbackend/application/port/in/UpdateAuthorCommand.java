@@ -1,9 +1,10 @@
 package com.gongmeda.ktechfeedbackend.application.port.in;
 
 import com.gongmeda.ktechfeedbackend.common.SelfValidating;
-import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Value;
+
+import java.util.Map;
 
 @EqualsAndHashCode(callSuper = true)
 @Value
