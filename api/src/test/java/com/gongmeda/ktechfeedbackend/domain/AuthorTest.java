@@ -85,6 +85,7 @@ class AuthorTest {
         );
 
         SoftAssertions.assertSoftly(softAssertions -> {
+            softAssertions.assertThat(author.getId()).isEqualTo(1L);
             softAssertions.assertThat(author.getName()).isEqualTo("name2");
             softAssertions.assertThat(author.getLogoUrl()).isEqualTo("logoUrl2");
             softAssertions.assertThat(author.getBlogUrl()).isEqualTo("blogUrl2");

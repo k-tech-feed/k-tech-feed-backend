@@ -128,6 +128,8 @@ class ArticleTest {
         );
 
         SoftAssertions.assertSoftly(softAssertions -> {
+            softAssertions.assertThat(article.getAuthor()).isEqualTo(author);
+            softAssertions.assertThat(article.getId()).isEqualTo(1L);
             softAssertions.assertThat(article.getTitle()).isEqualTo("title2");
             softAssertions.assertThat(article.getSummary()).isEqualTo("summary2");
             softAssertions.assertThat(article.getLinkUrl()).isEqualTo("linkUrl2");
