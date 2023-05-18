@@ -1,27 +1,24 @@
 package com.gongmeda.ktechfeedbackend.domain;
 
+import lombok.Getter;
+
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import lombok.Getter;
 
 @Getter
 public class Article {
 
-    private Long id;
     private final Author author;
+    private Long id;
     private String title;
     private String summary;
     private String linkUrl;
     private String thumbnailUrl;
     private LocalDateTime timestamp;
-    private Set<String> hashtags;
-
-    public Set<String> getHashtags() {
-        return Collections.unmodifiableSet(hashtags);
-    }
+    private Set<String> hashtags = new HashSet<>();
 
     public Article(
         Long id,
@@ -40,7 +37,7 @@ public class Article {
         this.linkUrl = linkUrl;
         this.thumbnailUrl = thumbnailUrl;
         this.timestamp = timestamp;
-        this.hashtags = new HashSet<>(hashtags);
+        this.hashtags.addAll(hashtags);
     }
 
     public Article(
@@ -58,7 +55,11 @@ public class Article {
         this.linkUrl = linkUrl;
         this.thumbnailUrl = thumbnailUrl;
         this.timestamp = timestamp;
-        this.hashtags = new HashSet<>(hashtags);
+        this.hashtags.addAll(hashtags);
+    }
+
+    public Set<String> getHashtags() {
+        return Collections.unmodifiableSet(hashtags);
     }
 
     public void update(
@@ -74,6 +75,7 @@ public class Article {
         this.linkUrl = linkUrl;
         this.thumbnailUrl = thumbnailUrl;
         this.timestamp = timestamp;
-        this.hashtags = new HashSet<>(hashtags);
+        this.hashtags.clear();
+        this.hashtags.addAll(hashtags);
     }
 }

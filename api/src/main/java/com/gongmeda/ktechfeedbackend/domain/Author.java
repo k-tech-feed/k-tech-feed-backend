@@ -1,23 +1,21 @@
 package com.gongmeda.ktechfeedbackend.domain;
 
-import java.util.Collections;
-import java.util.Map;
 import lombok.Getter;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 @Getter
 public class Author {
 
+    private final Map<String, String> links = new HashMap<>();
     private Long id;
     private String name;
     private String logoUrl;
     private String blogUrl;
     private String rssUrl;
     private String description;
-    private Map<String, String> links;
-
-    public Map<String, String> getLinks() {
-        return Collections.unmodifiableMap(links);
-    }
 
     public Author(
         Long id,
@@ -34,7 +32,7 @@ public class Author {
         this.blogUrl = blogUrl;
         this.rssUrl = rssUrl;
         this.description = description;
-        this.links = links;
+        this.links.putAll(links);
     }
 
     public Author(
@@ -50,7 +48,11 @@ public class Author {
         this.blogUrl = blogUrl;
         this.rssUrl = rssUrl;
         this.description = description;
-        this.links = links;
+        this.links.putAll(links);
+    }
+
+    public Map<String, String> getLinks() {
+        return Collections.unmodifiableMap(links);
     }
 
     public void update(
@@ -66,6 +68,7 @@ public class Author {
         this.blogUrl = blogUrl;
         this.rssUrl = rssUrl;
         this.description = description;
-        this.links = links;
+        this.links.clear();
+        this.links.putAll(links);
     }
 }
