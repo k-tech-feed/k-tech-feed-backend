@@ -18,17 +18,17 @@ class AuthorTest {
         Author author1 = new Author(
             1L,
             "name",
-            "logoUrl",
-            "blogUrl",
-            "rssUrl",
+            "https://example.com/logo.png",
+            "https://example.com",
+            "https://example.com/rss",
             "description",
             links
         );
         Author newAuthor = new Author(
             "name",
-            "logoUrl",
-            "blogUrl",
-            "rssUrl",
+            "https://example.com/logo.png",
+            "https://example.com",
+            "https://example.com/rss",
             "description",
             links
         );
@@ -46,9 +46,9 @@ class AuthorTest {
         Author author = new Author(
             1L,
             "name",
-            "logoUrl",
-            "blogUrl",
-            "rssUrl",
+            "https://example.com/logo.png",
+            "https://example.com",
+            "https://example.com/rss",
             "description",
             new HashMap<>() {{
                 put("key", "value");
@@ -64,9 +64,9 @@ class AuthorTest {
         Author author = new Author(
             1L,
             "name",
-            "logoUrl",
-            "blogUrl",
-            "rssUrl",
+            "https://example.com/logo.png",
+            "https://example.com",
+            "https://example.com/rss",
             "description",
             new HashMap<>() {{
                 put("key", "value");
@@ -75,9 +75,9 @@ class AuthorTest {
 
         author.update(
             "name2",
-            "logoUrl2",
-            "blogUrl2",
-            "rssUrl2",
+            "https://example.com/logo2.png",
+            "https://example.com/blog2",
+            "https://example.com/rss2",
             "description2",
             new HashMap<>() {{
                 put("key2", "value2");
@@ -87,9 +87,9 @@ class AuthorTest {
         SoftAssertions.assertSoftly(softAssertions -> {
             softAssertions.assertThat(author.getId()).isEqualTo(1L);
             softAssertions.assertThat(author.getName()).isEqualTo("name2");
-            softAssertions.assertThat(author.getLogoUrl()).isEqualTo("logoUrl2");
-            softAssertions.assertThat(author.getBlogUrl()).isEqualTo("blogUrl2");
-            softAssertions.assertThat(author.getRssUrl()).isEqualTo("rssUrl2");
+            softAssertions.assertThat(author.getLogoUrl()).isEqualTo("https://example.com/logo2.png");
+            softAssertions.assertThat(author.getBlogUrl()).isEqualTo("https://example.com/blog2");
+            softAssertions.assertThat(author.getRssUrl()).isEqualTo("https://example.com/rss2");
             softAssertions.assertThat(author.getDescription()).isEqualTo("description2");
             softAssertions.assertThat(author.getLinks()).size().isEqualTo(1);
             softAssertions.assertThat(author.getLinks().get("key2")).isEqualTo("value2");

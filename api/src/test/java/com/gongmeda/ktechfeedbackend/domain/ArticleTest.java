@@ -20,9 +20,9 @@ class ArticleTest {
         Author author = new Author(
             1L,
             "name",
-            "logoUrl",
-            "blogUrl",
-            "rssUrl",
+            "https://example.com/logo.png",
+            "https://example.com",
+            "https://example.com/rss",
             "description",
             new HashMap<>() {{
                 put("key", "value");
@@ -33,8 +33,8 @@ class ArticleTest {
             author,
             "title",
             "summary",
-            "linkUrl",
-            "thumbnailUrl",
+            "https://example.com/logo.png",
+            "https://example.com/thumbnail.png",
             LocalDateTime.now(),
             hashtags
         );
@@ -42,8 +42,8 @@ class ArticleTest {
             author,
             "title",
             "summary",
-            "linkUrl",
-            "thumbnailUrl",
+            "https://example.com/logo.png",
+            "https://example.com/thumbnail.png",
             LocalDateTime.now(),
             new HashSet<>() {{
                 add("hashtag");
@@ -63,9 +63,9 @@ class ArticleTest {
         Author author = new Author(
             1L,
             "name",
-            "logoUrl",
-            "blogUrl",
-            "rssUrl",
+            "https://example.com/logo.png",
+            "https://example.com",
+            "https://example.com/rss",
             "description",
             new HashMap<>() {{
                 put("key", "value");
@@ -76,8 +76,8 @@ class ArticleTest {
             author,
             "title",
             "summary",
-            "linkUrl",
-            "thumbnailUrl",
+            "https://example.com/logo.png",
+            "https://example.com/thumbnail.png",
             LocalDateTime.now(),
             new HashSet<>() {{
                 add("hashtag");
@@ -93,9 +93,9 @@ class ArticleTest {
         Author author = new Author(
             1L,
             "name",
-            "logoUrl",
-            "blogUrl",
-            "rssUrl",
+            "https://example.com/logo.png",
+            "https://example.com",
+            "https://example.com/rss",
             "description",
             new HashMap<>() {{
                 put("key", "value");
@@ -107,8 +107,8 @@ class ArticleTest {
             author,
             "title",
             "summary",
-            "linkUrl",
-            "thumbnailUrl",
+            "https://example.com/logo.png",
+            "https://example.com/thumbnail.png",
             now,
             new HashSet<>() {{
                 add("hashtag");
@@ -119,8 +119,8 @@ class ArticleTest {
         article.update(
             "title2",
             "summary2",
-            "linkUrl2",
-            "thumbnailUrl2",
+            "https://example.com/logo2.png",
+            "https://example.com/thumbnail2.png",
             newTimestamp,
             new HashSet<>() {{
                 add("hashtag2");
@@ -132,8 +132,8 @@ class ArticleTest {
             softAssertions.assertThat(article.getId()).isEqualTo(1L);
             softAssertions.assertThat(article.getTitle()).isEqualTo("title2");
             softAssertions.assertThat(article.getSummary()).isEqualTo("summary2");
-            softAssertions.assertThat(article.getLinkUrl()).isEqualTo("linkUrl2");
-            softAssertions.assertThat(article.getThumbnailUrl()).isEqualTo("thumbnailUrl2");
+            softAssertions.assertThat(article.getLinkUrl()).isEqualTo("https://example.com/logo2.png");
+            softAssertions.assertThat(article.getThumbnailUrl()).isEqualTo("https://example.com/thumbnail2.png");
             softAssertions.assertThat(article.getTimestamp()).isEqualTo(newTimestamp);
             softAssertions.assertThat(article.getHashtags()).size().isEqualTo(1);
             softAssertions.assertThat(article.getHashtags()).contains("hashtag2");
