@@ -18,6 +18,6 @@ class ArticleSearchedEventListener {
     @Async
     @EventListener
     public void onArticleViewedEvent(ArticleSearchedEvent event) {
-        relatedUseCase.recordSearch(event.keyword());
+        relatedUseCase.recordSearch(event.getKeyword());
     }
 }

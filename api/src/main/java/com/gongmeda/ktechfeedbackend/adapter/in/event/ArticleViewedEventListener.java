@@ -19,6 +19,6 @@ class ArticleViewedEventListener {
     @EventListener
     public void onArticleViewedEvent(ArticleViewedEvent event) {
         log.debug("article view event received: {}", event);
-        articleViewRecordUseCase.recordView(event.articleId(), event.ipAddress());
+        articleViewRecordUseCase.recordView(event.getArticleId(), event.getIpAddress());
     }
 }

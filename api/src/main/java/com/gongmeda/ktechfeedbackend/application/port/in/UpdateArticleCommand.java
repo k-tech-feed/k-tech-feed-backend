@@ -9,14 +9,14 @@ import java.util.Collection;
 
 @EqualsAndHashCode(callSuper = true)
 @Value
-public class UpdateArticleCommand extends SelfValidating<AddArticleCommand> {
+public class UpdateArticleCommand extends SelfValidating<UpdateArticleCommand> {
 
-    private final String title;
-    private final String summary;
-    private final String linkUrl;
-    private final String thumbnailUrl;
-    private final LocalDateTime timestamp;
-    private final Collection<String> hashtags;
+    String title;
+    String summary;
+    String linkUrl;
+    String thumbnailUrl;
+    LocalDateTime timestamp;
+    Collection<String> hashtags;
 
     public UpdateArticleCommand(
         String title,
@@ -32,5 +32,6 @@ public class UpdateArticleCommand extends SelfValidating<AddArticleCommand> {
         this.thumbnailUrl = thumbnailUrl;
         this.timestamp = timestamp;
         this.hashtags = hashtags;
+        this.validateSelf();
     }
 }

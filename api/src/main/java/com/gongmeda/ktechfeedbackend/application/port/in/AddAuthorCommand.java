@@ -12,15 +12,15 @@ import java.util.Map;
 public class AddAuthorCommand extends SelfValidating<AddAuthorCommand> {
 
     @NotNull
-    private String name;
-    private String logoUrl;
+    String name;
+    String logoUrl;
 
     @NotNull
-    private String blogUrl;
+    String blogUrl;
 
-    private String rssUrl;
-    private String description;
-    private Map<String, String> links;
+    String rssUrl;
+    String description;
+    Map<String, String> links;
 
     public AddAuthorCommand(
         String name,

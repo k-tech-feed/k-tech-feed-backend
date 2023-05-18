@@ -10,12 +10,12 @@ import java.util.Map;
 @Value
 public class UpdateAuthorCommand extends SelfValidating<AddAuthorCommand> {
 
-    private String name;
-    private String logoUrl;
-    private String blogUrl;
-    private String rssUrl;
-    private String description;
-    private Map<String, String> links;
+    String name;
+    String logoUrl;
+    String blogUrl;
+    String rssUrl;
+    String description;
+    Map<String, String> links;
 
     public UpdateAuthorCommand(
         String name,

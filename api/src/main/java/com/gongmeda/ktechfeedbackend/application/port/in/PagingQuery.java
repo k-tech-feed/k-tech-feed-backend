@@ -13,11 +13,11 @@ import lombok.Value;
 public class PagingQuery extends SelfValidating<PagingQuery> {
 
     @PositiveOrZero
-    private final Long afterId;
+    Long afterId;
 
     @Positive
     @NotNull
-    private final Integer size;
+    Integer size;
 
     public PagingQuery(@Nullable Long afterId, Integer size) {
         this.afterId = afterId == null ? 0 : afterId;
