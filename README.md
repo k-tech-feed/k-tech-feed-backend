@@ -5,7 +5,7 @@
 
 > K Tech Feed는 국내 IT 기업들의 기술 블로그 아티클을 수집하여 피드 형태로 제공하는 웹 서비스입니다. 여러 출처의 기술 블로그 게시물을 한 서비스 내에서 쉽게 조회하고 검색할 수 있습니다.
 
-## 주요 기술적 특징
+## ✨ 주요 기술적 특징
 
 - 확장성을 고려하여 `Hexagonal Architecture`를 적용했습니다.
 - 선언형 IaC(Infrastructure as Code)인 `Terraform`을 사용하여 AWS에 인프라를 구성하고 애플리케이션을 배포했습니다.
@@ -32,7 +32,7 @@
 - `beautifulsoup4`
 - `apscheduler`
 
-## Infra
+### Infra
 
 - `Terraform (1.4.2)`
 
